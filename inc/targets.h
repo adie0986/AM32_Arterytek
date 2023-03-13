@@ -47,7 +47,7 @@
 #endif
 
 #ifdef HAKRC_K_F421                                     
-#define FIRMWARE_NAME           "PokkuESC_C  "
+#define FIRMWARE_NAME           "HAKRC F4 K  "
 #define FILE_NAME               "PokkuESC_C"
 #define DEAD_TIME               80
 #define HARDWARE_GROUP_AT_B

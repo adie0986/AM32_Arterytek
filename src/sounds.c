@@ -49,7 +49,7 @@ void playBJNote(uint16_t freq, uint16_t bduration){        // hz and ms
 	uint16_t timerOne_reload = TIM1_AUTORELOAD;
  
 	TMR1->div = 10;
-	timerOne_reload = 4800000 / freq;
+	timerOne_reload = CPU_FREQUENCY_MHZ*100000 / freq;
 	
 	TMR1->pr = timerOne_reload;
 	TMR1->c1dt = beep_volume * timerOne_reload /TIM1_AUTORELOAD ; // volume of the beep, (duty cycle) don't go above 25 out of 2000
@@ -153,30 +153,40 @@ void playBrushedStartupTune(){
 	__enable_irq();
 }
 
-void playDuskingTune(){
-	setCaptureCompare();
-	TMR1->pr = TIM1_AUTORELOAD;
-	comStep(2);       // activate a pwm channel
-	TMR1->div = 60;        // frequency of beep
-    delayMillis(200);         // duration of beep
-	TMR1->div = 55;            // next beep is higher frequency
-	delayMillis(150);
-	TMR1->div = 50;         // higher again..
-	delayMillis(150);
-	TMR1->div = 45;        // frequency of beep
-    delayMillis(100);         // duration of beep
-	TMR1->div = 50;            // next beep is higher frequency
-	delayMillis(100);
-	TMR1->div = 55;         // higher again..
-	delayMillis(100);
-	TMR1->div = 25;         // higher again..
-	delayMillis(200);
-	TMR1->div = 55;         // higher again..
-	delayMillis(150);
-	allOff();                // turn all channels low again
-	TMR1->div = 0;           // set prescaler back to 0.
-	TMR1->pr = TIMER1_MAX_ARR;
-}
+//void playStartupTune(){    // diagnostic 6 beep
+//	__disable_irq();
+//	TMR1->pr = TIM1_AUTORELOAD;
+//	setCaptureCompare();
+//	comStep(1);       // activate a pwm channel
+//	TMR1->div = 70;        // frequency of beep
+//    delayMillis(500);         // duration of beep
+//	pause(100);
+//	comStep(2);       // activate a pwm channel
+//	TMR1->div = 60;        // frequency of beep
+//    delayMillis(500);         // duration of beep
+//	pause(100);
+//	comStep(3);       // activate a pwm channel
+//	TMR1->div = 50;        // frequency of beep
+//    delayMillis(500);         // duration of beep
+//	pause(100);
+//    comStep(4);
+//	TMR1->div = 40;         // higher again..
+//	delayMillis(500);
+//	pause(100);
+//	   comStep(5);
+//	TMR1->div = 30;         // higher again..
+//	delayMillis(500);
+//	pause(100);
+//	   comStep(6);
+//	TMR1->div = 20;         // higher again..
+//	delayMillis(500);
+//	pause(100);
+//	allOff();                // turn all channels low again
+//	TMR1->div = 0;           // set prescaler back to 0.
+//	TMR1->pr = TIMER1_MAX_ARR;
+//	WDT->cmd = WDT_CMD_RELOAD;
+//	__enable_irq();
+//}
 
 
 void playInputTune2(){

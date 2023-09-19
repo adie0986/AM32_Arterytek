@@ -107,22 +107,26 @@ void computeServoInput(){
 
 void transfercomplete(){
 	if(armed && dshot_telemetry){
-	    if(out_put){
-
-
-	  	receiveDshotDma();
+		    if(out_put){
+	//		changeToInput();		
+    // 	  receiveDshotDma();
+        compute_dshot_flag = 2;
+     //	make_dshot_package();
 	   	return;
 	    }else{
+		//		TMR15->cval = 1;
+		//		TMR15->ists = (uint16_t)~TMR_OVF_FLAG;
+		//		TMR15->iden |= TMR_OVF_INT;
+        sendDshotDma();
+        compute_dshot_flag = 1;
 
-			sendDshotDma();
-			make_dshot_package();
-			computeDshotDMA();
 	    return;
 	    }
 	}
 
 	  if (inputSet == 0){
 	 	 detectInput();
+	
 	 	receiveDshotDma();
 	 return;
 	  }
@@ -136,35 +140,33 @@ if(dshot_telemetry){
 //    	TIM17->CNT = 0;
     	make_dshot_package();          // this takes around 10us !!
   	computeDshotDMA();             //this is slow too..
+		
   	receiveDshotDma();             //holy smokes.. reverse the line and set up dma again
    	return;
     }else{
+		
 		sendDshotDma();
+		//	IC_TIMER_REGISTER->ctrl1_bit.tmren = TRUE;
     return;
     }
 }else{
 
 		if (dshot == 1){
 			computeDshotDMA();
-			if(send_telemetry){
-            // done in 10khz routine
-			}
+			
 			receiveDshotDma();
 		}
 		if  (servoPwm == 1){
+            while(INPUT_PIN_PORT->idt & INPUT_PIN){
+			}
+				 if(!((INPUT_PIN_PORT->idt & INPUT_PIN))){  // if the pin is low 
+	 
 			computeServoInput();
-		//	LL_TIM_IC_SetPolarity(IC_TIMER_REGISTER, IC_TIMER_CHANNEL, LL_TIM_IC_POLARITY_RISING); // setup rising pin trigger.
-      //TIMER_CHCTL2(IC_TIMER_REGISTER) |= (uint32_t)(TIMER_IC_POLARITY_RISING);
-		//	IC_TIMER_REGISTER->CTRL2 |= TMR_ICPolarity_Rising;
-			  
-        IC_TIMER_REGISTER->cctrl_bit.c1p = TMR_INPUT_RISING_EDGE;
-			
-			
-   		receiveDshotDma();
-    // 	LL_DMA_EnableIT_HT(DMA1, INPUT_DMA_CHANNEL);
-	//		DMA_CHCTL(INPUT_DMA_CHANNEL) |= DMA_INT_HTF;
-		//	INPUT_DMA_CHANNEL->CHCTRL |= DMA_INT_HT;
-			INPUT_DMA_CHANNEL->ctrl |= DMA_HDT_INT;
+			}	  
+     IC_TIMER_REGISTER->cctrl_bit.c1p = TMR_INPUT_RISING_EDGE;
+		
+   	receiveDshotDma();
+		 INPUT_DMA_CHANNEL->ctrl |= DMA_HDT_INT;
 		}
 
 	}

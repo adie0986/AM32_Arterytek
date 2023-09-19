@@ -24,6 +24,7 @@
 //#define AIKON_55A_F421
 //#define WRAITH32_F421
 #define HAKRC_K_F421
+#define HAKRC_Pokku_F421
 
 #endif
 
@@ -228,7 +229,7 @@
 
 #ifdef HAKRC_K_F421                                     
 #define FIRMWARE_NAME           "HAKRC F4 K  "
-#define FILE_NAME               "HAKRC_PokkuESC_C"
+#define FILE_NAME               "HAKRC_K_F421"
 #define DEAD_TIME               80
 #define HARDWARE_GROUP_AT_B
 #define HARDWARE_GROUP_AT_504
@@ -314,6 +315,15 @@
 #define FILE_NAME               "TEKKO32_F415"
 #define DEAD_TIME               100
 #define HARDWARE_GROUP_AT_D
+#define USE_SERIAL_TELEMETRY
+#endif
+
+#ifdef HAKRC_Pokku_F421                                     
+#define FIRMWARE_NAME           "HAKRC PokkuESC "
+#define FILE_NAME               "PokkuESC_C"
+#define DEAD_TIME               80
+#define HARDWARE_GROUP_AT_B
+#define HARDWARE_GROUP_AT_504
 #define USE_SERIAL_TELEMETRY
 #endif
 

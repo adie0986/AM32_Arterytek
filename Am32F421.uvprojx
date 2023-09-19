@@ -4073,7 +4073,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>AM32_HAKRC_K_F421</OutputName>
+          <OutputName>AM32_HAKRC_PokkuESC_F421</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -4361,7 +4361,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>AT32F421K8U7,USE_STDPERIPH_DRIVER, HAKRC_K_F421</Define>
+              <Define>AT32F421K8U7,USE_STDPERIPH_DRIVER, HAKRC_PokkuESC_F421</Define>
               <Undefine></Undefine>
               <IncludePath>.\mcu\F421\CMSIS\CM4\CoreSupport;.\mcu\F421\CMSIS\CM4\DeviceSupport;.\mcu\F421\AT32F421_StdPeriph_Driver\inc;.\Inc;.\mcu\F421\mcuinc</IncludePath>
             </VariousControls>
